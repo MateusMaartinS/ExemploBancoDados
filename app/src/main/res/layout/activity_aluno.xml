@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@android:color/darker_gray"/>
+        android:backgroundTint="@android:color/holo_blue_light"/>
 
 
 </RelativeLayout>

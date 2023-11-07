@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.exemplobancodados.dao.AlunoDao;
 import com.example.exemplobancodados.model.Aluno;
 
+import java.util.ArrayList;
+
 public class AlunoController {
 
     private Context context;
@@ -38,5 +40,10 @@ public class AlunoController {
             return "Erro ao Gravar Aluno";
         }
         return null;
+    }
+
+    public ArrayList<Aluno> retornarTodosAlunos(){
+       return AlunoDao.getInstancia(context).getAll();
+
     }
 }

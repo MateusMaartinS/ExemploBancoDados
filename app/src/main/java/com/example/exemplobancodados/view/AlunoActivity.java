@@ -2,6 +2,8 @@ package com.example.exemplobancodados.view;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +14,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.exemplobancodados.R;
+import com.example.exemplobancodados.adapter.AlunoListAdapter;
+import com.example.exemplobancodados.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import controller.AlunoController;
 
@@ -25,12 +31,17 @@ public class AlunoActivity extends AppCompatActivity {
 
     private EditText edNome;
 
+    private View viewAlert;
+    private RecyclerView rvAlunos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aluno);
 
         controller = new AlunoController(this);
+
+        rvAlunos = findViewById(R.id.rvAlunos);
 
         btCadastroAluno = findViewById(R.id.btCadastroAluno);
 
@@ -40,6 +51,8 @@ public class AlunoActivity extends AppCompatActivity {
                 abrirCadastro();
             }
         });
+
+        atualizarListaAluno();
     }
 
     private void abrirCadastro() {
@@ -86,9 +99,19 @@ public class AlunoActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, "Aluno salvo com sucesso!", Toast.LENGTH_LONG).show();
+
+            dialog.dismiss();
+
+            atualizarListaAluno();
         }
 
     }
 
+    private void atualizarListaAluno(){
+        ArrayList<Aluno> listaAlunos = controller.retornarTodosAlunos();
+        AlunoListAdapter adapter = new AlunoListAdapter(listaAlunos, this);
+        rvAlunos.setLayoutManager(new LinearLayoutManager(this));
+        rvAlunos.setAdapter(adapter);
 
+    }
 }
