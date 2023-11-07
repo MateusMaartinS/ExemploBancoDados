@@ -17,11 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Aluno aluno = new Aluno();
-        aluno.setRa(123);
-        aluno.setNome("JUCA");
-        AlunoDao.getInstancia(this).insert(aluno);
-
     }
 
     public void abrirCadastroAluno(View view) {
